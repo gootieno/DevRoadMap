@@ -1,4 +1,4 @@
-import { buildForm, initializePage } from "./containers.js";
+import { initializePage } from "./containers.js";
 import { clearForm } from "./localStorage.js";
 
 window.addEventListener("DOMContentLoaded", () => {
@@ -40,7 +40,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
   clearFormButton.addEventListener("click", (e) => {
     clearForm("form-storage");
-    // buildForm();
+    //();
   });
 
   const menu = document.getElementById("heading-menu");

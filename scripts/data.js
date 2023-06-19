@@ -1,4 +1,4 @@
-export const formFieldHeadings = {
+export let fullstack = {
   GIT: [
     "creating a repo",
     "git flow",
@@ -49,4 +49,15 @@ export const formFieldHeadings = {
     "actions, action creators, thunks",
     "redux vs context",
   ],
+};
+
+export const python = {
+  PYTHON: [
+    "Link: everything python",
+    "https://www.youtube.com/watch?v=_uQrJ0TkZlc&ab_channel=ProgrammingwithMosh",
+  ],
+  IoT: [
+    "getting started with rasberryPi",
+    "rasberryPi beginner projects"
+  ]
 };

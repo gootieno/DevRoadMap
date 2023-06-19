@@ -1,9 +1,71 @@
-import { formFieldHeadings } from "./data.js";
+import { fullstack, python } from "./data.js";
+import { handleFormToggle } from "./handers.js";
 import { buildLocalStorage } from "./localStorage.js";
+import { renderForm } from "./utilities.js";
 
 export const initializePage = () => {
   buildFormHeadingContainer();
-  buildForm();
+  buildSelectFormContainer();
+  buildFormContainer();
+};
+
+export const buildSelectFormContainer = () => {
+  const selectFormContainer = document.createElement("div");
+  const fullStackForm = document.createElement("input");
+  const fullStackFormHeading = document.createElement("label");
+
+  const pythonForm = document.createElement("input");
+  const pythonFormHeading = document.createElement("label");
+
+  selectFormContainer.setAttribute("id", "select-form-container");
+  selectFormContainer.style.display = "flex";
+  selectFormContainer.style.justifyContent = "center";
+
+  fullStackForm.setAttribute("class", "fullstack-form-item");
+  fullStackForm.setAttribute("class", "form-types");
+  fullStackForm.setAttribute("type", "radio");
+  fullStackForm.setAttribute("name", "fullstack");
+  fullStackForm.setAttribute("value", "fullstack");
+
+  fullStackFormHeading.setAttribute("class", "fullstack-form-item");
+  fullStackFormHeading.innerText = "Full Stack";
+
+  pythonForm.setAttribute("class", "python-form-item");
+  pythonForm.setAttribute("class", "form-types");
+  pythonForm.setAttribute("type", "radio");
+  pythonForm.setAttribute("name", "python");
+  pythonForm.setAttribute("value", "python");
+  pythonFormHeading.innerText = "Python";
+
+  pythonFormHeading.setAttribute("class", "python-form-item");
+
+  fullStackForm.addEventListener("input", handleFormToggle);
+  pythonForm.addEventListener("input", handleFormToggle);
+
+  const setting = localStorage.getItem("form-type");
+
+  switch (setting) {
+    case "python":
+      pythonForm.checked = true;
+      fullStackForm.checked = false;
+      break;
+    case "fullstack":
+      pythonForm.checked = false;
+      fullStackForm.checked = true;
+      break;
+    default:
+      fullStackForm.checked = true;
+      localStorage.setItem("form-type", "fullstack");
+      break;
+  }
+
+  selectFormContainer.append(
+    fullStackForm,
+    fullStackFormHeading,
+    pythonForm,
+    pythonFormHeading
+  );
+  document.body.appendChild(selectFormContainer);
 };
 
 const buildFormHeadingContainer = () => {
@@ -31,7 +93,7 @@ const buildFormHeadingContainer = () => {
 
   buildAttributes(formHeading, headingAttributes);
 
-  formHeading.innerText = "Fullstack Intro";
+  formHeading.innerText = "Dev Roadmap";
 
   formHeadingContainer.setAttribute("id", "form-heading-container");
 
@@ -167,7 +229,7 @@ const buildTheme = () => {
   headingMenuContainer.append(themeHeading, menuInputContainer);
 };
 
-export const buildForm = () => {
+const buildFormContainer = () => {
   const formContainer = document.createElement("section");
 
   formContainer.style.margin = "0 auto";
@@ -180,63 +242,19 @@ export const buildForm = () => {
   formContainer.style.marginBottom = "5%";
 
   formContainer.setAttribute("id", "form-container");
-
-  let formStorage;
-  if (localStorage.getItem("form-storage")) {
-    formStorage = JSON.parse(localStorage.getItem("form-storage"));
-  } else {
-    formStorage = {};
-  }
-
-  for (const formHeading in formFieldHeadings) {
-    const container = document.createElement("div");
-    const heading = document.createElement("h2");
-
-    container.setAttribute("id", `form-${formHeading.toLowerCase()}-container`);
-
-    heading.innerText = formHeading;
-    heading.setAttribute("class", "form-headings");
-    container.appendChild(heading);
-
-    for (const formContent of formFieldHeadings[formHeading]) {
-      const formGroupContainer = document.createElement("div");
-      const formLabel = document.createElement("label");
-      const formInput = document.createElement("input");
-
-      formLabel.setAttribute("class", formHeading.toLowerCase());
-      formLabel.setAttribute("for", formContent);
-      formLabel.dataset.fieldName = "formHeading" + FORM_NUMBER;
-      formLabel.innerText = formContent;
-
-      formInput.setAttribute("type", "checkbox");
-      formInput.setAttribute("name", formContent.toLowerCase());
-      formInput.setAttribute("class", "form-inputs");
-      formInput.dataset.fieldName = "formHeading" + FORM_NUMBER;
-
-      FORM_NUMBER++;
-
-      if (formStorage[formContent] === "true") {
-        formInput.setAttribute("checked", "true");
-        formLabel.style.textDecoration = "line-through";
-        formLabel.style.color = "green";
-      } else {
-        formStorage[formContent] = "false";
-        formLabel.style.textDecoration = "none";
-        formLabel.style.color = "inherit";
-      }
-
-      formGroupContainer.style.width = "100%";
-      formGroupContainer.appendChild(formInput);
-      formGroupContainer.appendChild(formLabel);
-
-      container.appendChild(formGroupContainer);
-    }
-
-    formContainer.appendChild(container);
-  }
-
-  localStorage.setItem("form-storage", JSON.stringify(formStorage));
   document.body.appendChild(formContainer);
+  buildForm();
+};
+
+export const buildForm = () => {
+  const formName = localStorage.getItem("form-type");
+  const formList = document.createElement("div");
+
+  console.log("form type ", formName);
+
+  const formContainer = renderForm(formName);
+  formList.children[0] = formContainer;
+  document.body.appendChild(formList);
 };
 
 const buildAttributes = (element, attributeLists) => {
