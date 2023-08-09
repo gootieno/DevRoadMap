@@ -1,136 +1,117 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
-
+/* Reset some default styles */
 * {
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
-    font-family: 'Roboto';
-    /* overflow: hidden; */
-}
-
-html {
-    height: 100%;
-    width: 100vw;
-}
-
-
-#form-container::-webkit-scrollbar {
-    background: transparent
-}
-
-#form-container {
-    overflow-y: scroll;
-    scrollbar-color: red blue;
-}
-
-input {
-    cursor: pointer;
+  }
   
-}
+  /* Body styles */
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  /* Navbar styles */
+  .navbar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #333;
+    color: white;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+    padding: 10px 0;
+    width: 100%;
+  }
 
-body {
-    position: relative;
-}
+  .form-type-radio-container {
+    display: flex;
+  }
+  
+  .form-type-radio-container label {
+    margin: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap:5px;
+  }
 
-.form-headings {
-    opacity: 0.7;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.8);
-}
+  .form-type-radio-container input {
+    cursor: pointer;
+  }
 
-body.darkModeOn {
-    background-color: rgba(32, 31, 77, 0.877);
-    color: rgb(168, 168, 168)
-}
 
-body.darkModeOn .menu {
-    color: rgb(19, 18, 66);
-}
-
-body.darkModeOff  .menu {
-    color: black;
-   
-}
-
-body.darkModeOff {
+  
+  /* Header styles */
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #333;
+    color: white;
+    padding: 10px 20px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+  }
+  
+  .menu-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  #dropdown-button {
+    background-color: transparent;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .dropdown-menu {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 40px;
+    right: 20px;
     background-color: white;
-    color: black;
-}
-
-#menu-input-container {
-    display: grid;
-    grid-template-areas: 
-    "darkMode darkModeLabel"
-    "lightMode lightModeLabel";
-
-}
-
-#dark-mode {
-    grid-area: darkMode;
-}
-
-#dark-mode + label {
-    grid-area: darkModeLabel;
-}
-
-#light-mode + label {
-    grid-area: lightModeLabel;
-}
-
-#light-mode {
-    grid-area: lightMode;
-}
-
-#menu-container {
-    transition: height ease 1s;
-    padding-inline-start: 0px;
-    height: 7rem;
-    overflow: hidden;
-}
-
-#menu-container.hide-menu {
-    height: 0px;
-}
-
-
-
-.menu-items {
-    padding: 0px 25px;
-}
-
-
-.menu-items:hover {
-    color: black;
-    font-weight: bolder;
-    
-}
-
-@media screen and (min-width: 350px) and (max-width: 550px) {
- 
-    
-    #form-heading-container {
-        width: 100%;
-    }
-
-    #form-container {
-        min-width: 350px;
-    }
-}
-
-@media screen and (min-width: 360px) and (max-width: 800px){
-    #form-container {
-        min-width: 95%;
-    }
-}
-
-
-@media screen and (min-width: 801px) and (max-width: 1200px){
-    #form-container {
-        min-width: 70%;
-    }
-}
-
-@media screen and (min-width: 801px){
-    #form-container {
-        width: 70%;
-        margin-top: 20px;
-    }
-}
-
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 10px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+  }
+  
+  .dropdown-menu.open {
+    display: flex;
+  }
+  
+  /* Form section styles */
+  .form-section {
+    margin: 20px 0;
+    padding: 10px;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .label-container {
+    display: flex;
+    align-items: center;
+    margin: 5px 0;
+  }
+  
+  .checkbox {
+    margin-right: 10px;
+  }
+  
+  /* Dark mode styles */
+  .dark-mode {
+    background-color: #333;
+    color: white;
+  }
+  
+  /* ... (any other existing CSS) */
+  
